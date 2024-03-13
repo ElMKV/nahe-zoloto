@@ -37,7 +37,7 @@ class _AuthPageState extends State<AuthPage> {
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.pageState.errMsg)));
             } else if (state is AuthNav) {
-              // context.read<RouteImpl>().push(Routes.main, args: state.pageState.auth);
+              print('loggened');
             }
           },
           builder: (context, state) {
@@ -46,82 +46,88 @@ class _AuthPageState extends State<AuthPage> {
             }
             return Padding(
               padding: const EdgeInsets.only(top: 23.0, left: 18, right: 18),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(child: Image.asset("assets/avatar.png")),
-                  const Text(
-                    S.enter,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const Text(
-                    S.hellow_title,
-                    style: TextStyle(fontSize: 13),
-                  ),
-                  const SizedBox(
-                    height: 31,
-                  ),
-                  SizedBox(
-                    height: 50,
-                    child: TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        suffixIcon: SvgPicture.asset(
-                          fit: BoxFit.scaleDown,
-                          'assets/user.svg',
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(child: Image.asset("assets/avatar.png")),
+                    const Text(
+                      S.enter,
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    const Text(
+                      S.hellow_title,
+                      style: TextStyle(fontSize: 13),
+                    ),
+                    const SizedBox(
+                      height: 31,
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: TextField(
+                        controller: controller,
+                        decoration: InputDecoration(
+                          suffixIcon: SvgPicture.asset(
+                            fit: BoxFit.scaleDown,
+                            'assets/user.svg',
+                          ),
+                          hoverColor: Colors.black,
+                          border: const OutlineInputBorder(),
+                          hintText: S.login_edit_text,
                         ),
-                        hoverColor: Colors.black,
-                        border: const OutlineInputBorder(),
-                        hintText: S.login_edit_text,
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  SizedBox(
-                    height: 50,
-                    child: TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        suffixIcon: SvgPicture.asset(
-                          fit: BoxFit.scaleDown,
-                          'assets/eye_off.svg',
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: TextField(
+                        controller: controllerPass,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          suffixIcon: SvgPicture.asset(
+                            fit: BoxFit.scaleDown,
+                            'assets/eye_off.svg',
+                          ),
+                          hoverColor: Colors.black,
+                          border: const OutlineInputBorder(),
+                          hintText: S.password_edit_text,
                         ),
-                        hoverColor: Colors.black,
-                        border: const OutlineInputBorder(),
-                        hintText: S.password_edit_text,
                       ),
                     ),
-                  ),
-                  CheckboxListTile(
-                    title: const Text(S.checkbox_remember_me),
-                    value: true,
-
-                    side: const BorderSide(
-                      color: Colors.black, //your desire colour here
-                      width: 1.5,
+                    CheckboxListTile(
+                      title: const Text(S.checkbox_remember_me),
+                      value: true,
+                
+                      side: const BorderSide(
+                        color: Colors.black, //your desire colour here
+                        width: 1.5,
+                      ),
+                      onChanged: (newValue) {
+                        setState(() {});
+                      },
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                      controlAffinity: ListTileControlAffinity
+                          .leading, //  <-- leading Checkbox
                     ),
-                    onChanged: (newValue) {
-                      setState(() {});
-                    },
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-                    controlAffinity: ListTileControlAffinity
-                        .leading, //  <-- leading Checkbox
-                  ),
-                  SizedBox(height: 41,),
-                  Center(
-                      child: CustomButton(
-                    text: S.enter,
-                    bold: true,
-                    width: 380,
-                    height: 50,
-                    fontSize: 16,
-                  )),
-                  SizedBox(height: 10,),
-
-                  Center(child: Text(S.forgot_password)),
-                ],
+                    SizedBox(height: 41,),
+                    Center(
+                        child: CustomButton(
+                          onTap: () => {
+                            context.read<AuthBloc>().add(AuthLogin(login: controller.value.text, pass: controllerPass.value.text)),
+                          },
+                      text: S.enter,
+                      bold: true,
+                      width: 380,
+                      height: 50,
+                      fontSize: 16,
+                    )),
+                    SizedBox(height: 10,),
+                
+                    Center(child: Text(S.forgot_password)),
+                  ],
+                ),
               ),
             );
           },

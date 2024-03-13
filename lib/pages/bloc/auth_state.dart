@@ -31,19 +31,16 @@ class PageState {
   String errMsg;
   Auth auth;
   Object? args;
-  bool validateLogin;
-  bool validatePass;
-  bool obscurePass;
-  bool get loginEnable => validateLogin && validatePass;
+  bool isLogined;
+
 
   PageState({
     this.onAwait = false,
     this.errMsg = '',
     this.auth = const Auth(),
     this.args,
-    this.validateLogin = false,
-    this.validatePass = false,
-    this.obscurePass = true,
+    this.isLogined = false,
+
   });
 
   PageState copyWith({
@@ -51,19 +48,16 @@ class PageState {
     String? errMsg,
     Auth? auth,
     Object? args,
-    bool? acceptRules,
-    bool? validateLogin,
-    bool? validatePass,
-    bool? obscurePass,
+    bool? isLogined,
+
   }) {
     return PageState(
       onAwait: onAwait ?? this.onAwait,
       errMsg: errMsg ?? this.errMsg,
       auth: auth ?? this.auth,
       args: args ?? this.args,
-      validateLogin: validateLogin ?? this.validateLogin,
-      validatePass: validatePass ?? this.validatePass,
-      obscurePass: obscurePass ?? this.obscurePass,
+      isLogined: isLogined ?? this.isLogined,
+
     );
   }
 }

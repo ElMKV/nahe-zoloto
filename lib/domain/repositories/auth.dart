@@ -15,9 +15,10 @@ class AuthRepository {
           ? Auth.fromJson(response!.data)
           : const Auth();
     } on DioError catch (e) {
-      final errorMessage = DioExceptions.fromDioError(e).toString();
-      // final SnackBar snackBar = SnackBar(content: Text(errorMessage));
-      // snackbarKey.currentState?.showSnackBar(snackBar);
+      print(e);
+      // final errorMessage = DioExceptions.fromDioError(e).toString();
+      // // final SnackBar snackBar = SnackBar(content: Text(errorMessage));
+      // // snackbarKey.currentState?.showSnackBar(snackBar);
       return const Auth();
     }
   }

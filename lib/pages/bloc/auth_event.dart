@@ -9,17 +9,6 @@ class AuthMsgErr extends AuthEvent {
   AuthMsgErr(this.msg);
 }
 
-class AuthAcceptLogin extends AuthEvent {
-  final String val;
-  AuthAcceptLogin(this.val);
-}
-class AuthAcceptPass extends AuthEvent {
-  final String val;
-  AuthAcceptPass(this.val);
-}
-
-class AuthObscurePass extends AuthEvent {}
-
 class AuthLogin extends AuthEvent {
   String login;
   String pass;

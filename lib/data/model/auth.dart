@@ -8,11 +8,11 @@ part 'auth.g.dart';
 @JsonSerializable()
 class Auth {
   @JsonKey(name: 'token')
-  final String token;
+  final String? token;
 
 
   const Auth({
-    this.token = '',
+    this.token,
 
 
   });

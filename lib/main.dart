@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nashe_zoloto/injection_container.dart';
@@ -8,8 +10,17 @@ import 'pages/auth_page.dart';
 
 void main() {
   runApp(const MyApp());
+  HttpOverrides.global = MyHttpOverrides();
+
 }
 
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
+}
 class AlwaysActiveBorderSide extends MaterialStateBorderSide {
   @override
   BorderSide? resolve(_) => const BorderSide(color: Colors.black54);

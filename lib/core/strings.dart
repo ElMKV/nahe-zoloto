@@ -252,7 +252,6 @@ class S {
 
   //errors
   static const String error_title = "Ошибка";
-  static const String error_download_file_title = "Ошибка загрузки файла";
   static const String auth_error = "Ошибка авторизации";
   static const String session_expired_error = "Сессия просрочена";
   static const String unknown_error = "Произошла неизвестная ошибка";
