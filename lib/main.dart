@@ -3,14 +3,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nashe_zoloto/injection_container.dart';
-import 'package:nashe_zoloto/pages/bloc/auth_bloc.dart';
+import 'package:nashe_zoloto/pages/home/home.dart';
 
-import 'pages/auth_page.dart';
+import 'pages/auth/auth_page.dart';
+import 'pages/auth/bloc/auth_bloc.dart';
 
 
 void main() {
   runApp(const MyApp());
   HttpOverrides.global = MyHttpOverrides();
+
 
 }
 
@@ -29,6 +31,8 @@ class AlwaysActiveBorderSide extends MaterialStateBorderSide {
 class MyApp extends StatelessWidget {
 
   const MyApp({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +53,8 @@ class MyApp extends StatelessWidget {
           ),
 
         ],
-        child: AuthPage(),
+        // child: AuthPage(),
+        child: HomePage(),
       ),
     );
   }

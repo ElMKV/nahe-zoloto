@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:nashe_zoloto/pages/bloc/auth_bloc.dart';
+
+import 'pages/auth/bloc/auth_bloc.dart';
 
 final getIt = GetIt.instance;
 

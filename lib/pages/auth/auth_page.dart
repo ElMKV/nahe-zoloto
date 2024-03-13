@@ -5,8 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nashe_zoloto/core/strings.dart';
 import 'package:nashe_zoloto/domain/router/route_impl.dart';
 import 'package:nashe_zoloto/futures/core_widgets/custom_button.dart';
+import 'package:nashe_zoloto/pages/auth/bloc/auth_bloc.dart';
+import 'package:nashe_zoloto/pages/home/home.dart';
 
-import 'bloc/auth_bloc.dart';
 
 class AuthPage extends StatefulWidget {
   AuthPage({Key? key}) : super(key: key);
@@ -37,8 +38,8 @@ class _AuthPageState extends State<AuthPage> {
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.pageState.errMsg)));
             } else if (state is AuthNav) {
-              print('loggened');
-            }
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const HomePage()));            }
           },
           builder: (context, state) {
             if (state is AuthLoading) {
