@@ -10,6 +10,11 @@ void main() {
   runApp(const MyApp());
 }
 
+class AlwaysActiveBorderSide extends MaterialStateBorderSide {
+  @override
+  BorderSide? resolve(_) => const BorderSide(color: Colors.black54);
+}
+
 class MyApp extends StatelessWidget {
 
   const MyApp({super.key});
@@ -17,6 +22,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        checkboxTheme: CheckboxThemeData(
+          checkColor: MaterialStateProperty.resolveWith((_) => Colors.black),
+          fillColor: MaterialStateProperty.resolveWith((_) => Colors.transparent),
+          side: AlwaysActiveBorderSide(),
+        ),
+      ),
       title: 'Movie App',
       debugShowCheckedModeBanner: false,
       home: MultiBlocProvider(
