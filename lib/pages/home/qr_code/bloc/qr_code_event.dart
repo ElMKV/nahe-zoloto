@@ -11,3 +11,6 @@ class QrScanEvent extends QrCodeEvent {
 class QrScanStopEvent extends QrCodeEvent {
   QrScanStopEvent();
 }
+class QrScanNavEvent extends QrCodeEvent {
+  QrScanNavEvent();
+}

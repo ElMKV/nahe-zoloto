@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:nashe_zoloto/pages/auth/auth_page.dart';
-import 'package:nashe_zoloto/pages/home/home.dart';
+import 'package:nashe_zoloto/pages/home/home/home.dart';
 
 
 class RouteConstants {

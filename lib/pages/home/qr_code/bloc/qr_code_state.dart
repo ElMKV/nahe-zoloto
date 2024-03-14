@@ -18,6 +18,10 @@ class QrCodeUp extends QrCodeState {
   const QrCodeUp(PageState pageState) : super(pageState);
 }
 
+class QrCodeNav extends QrCodeState {
+  const QrCodeNav(PageState pageState) : super(pageState);
+}
+
 
 
 class PageState {
@@ -25,6 +29,7 @@ class PageState {
   String errMsg;
   Object? args;
   bool enables;
+  BarcodeModel barcodeModel;
 
 
   PageState({
@@ -32,6 +37,7 @@ class PageState {
     this.errMsg = '',
     this.args,
     this.enables = false,
+    this.barcodeModel = const BarcodeModel(),
 
 
   });
@@ -41,6 +47,7 @@ class PageState {
     bool? onAwait,
     String? errMsg,
     Object? args,
+    BarcodeModel? barcodeModel,
 
 
   }) {
@@ -49,6 +56,7 @@ class PageState {
       errMsg: errMsg ?? this.errMsg,
       args: args ?? this.args,
       enables: enables ?? this.enables,
+      barcodeModel: barcodeModel ?? this.barcodeModel,
     );
   }
 }

@@ -18,6 +18,10 @@ BarcodeModel _$BarcodeModelFromJson(Map<String, dynamic> json) => BarcodeModel(
               ?.map((e) => Properties.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      attachments: (json['attachments'] as List<dynamic>?)
+              ?.map((e) => Attachments.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$BarcodeModelToJson(BarcodeModel instance) =>
@@ -27,6 +31,7 @@ Map<String, dynamic> _$BarcodeModelToJson(BarcodeModel instance) =>
       'prices': instance.prices,
       'brand': instance.brand,
       'properties': instance.properties,
+      'attachments': instance.attachments,
     };
 
 Prices _$PricesFromJson(Map<String, dynamic> json) => Prices(
@@ -48,4 +53,15 @@ Map<String, dynamic> _$PropertiesToJson(Properties instance) =>
     <String, dynamic>{
       'name': instance.name,
       'value': instance.value,
+    };
+
+Attachments _$AttachmentsFromJson(Map<String, dynamic> json) => Attachments(
+      name: json['name'] as String? ?? '',
+      path: json['path'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$AttachmentsToJson(Attachments instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'path': instance.path,
     };

@@ -9,10 +9,10 @@ import 'package:nashe_zoloto/core/constants/constant.dart';
 import 'package:nashe_zoloto/core/strings.dart';
 import 'package:nashe_zoloto/data/model/profile/profile.dart';
 import 'package:nashe_zoloto/futures/core_widgets/custom_button.dart';
-import 'package:nashe_zoloto/pages/home/bloc/home_bloc.dart';
+import 'package:nashe_zoloto/pages/home/home/bloc/home_bloc.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-import 'qr_code/qr_code_page.dart';
+import '../qr_code/qr_code_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

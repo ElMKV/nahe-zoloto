@@ -17,6 +17,8 @@ class BarcodeModel {
   final String brand;
   @JsonKey(name: 'properties')
   final List<Properties> properties;
+  @JsonKey(name: 'attachments')
+  final List<Attachments> attachments;
 
 
   const BarcodeModel({
@@ -25,6 +27,7 @@ class BarcodeModel {
     this.prices = const [],
     this.brand = '',
     this.properties = const [],
+    this.attachments = const [],
 
 
 
@@ -41,6 +44,7 @@ class BarcodeModel {
     List<Prices>? prices,
     String? brand,
     List<Properties>? properties,
+    List<Attachments>? attachments,
 
 
   }) {
@@ -50,6 +54,7 @@ class BarcodeModel {
       prices: prices ?? this.prices,
       brand: brand ?? this.brand,
       properties: properties ?? this.properties,
+      attachments: attachments ?? this.attachments,
 
     );
   }
@@ -113,6 +118,36 @@ class Properties {
     return Properties(
       name: name ?? this.name,
       value: value ?? this.value,
+    );
+  }
+}
+
+@JsonSerializable()
+class Attachments {
+  @JsonKey(name: 'name')
+  final String name;
+  @JsonKey(name: 'path')
+  final String path;
+
+
+
+  const Attachments({
+    this.name = '',
+    this.path = '',
+  });
+
+  factory Attachments.fromJson(Map<String, dynamic> json) =>
+      _$AttachmentsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AttachmentsToJson(this);
+
+  Attachments copyWith({
+    String? name,
+    String? path,
+  }) {
+    return Attachments(
+      name: name ?? this.name,
+      path: path ?? this.path,
     );
   }
 }

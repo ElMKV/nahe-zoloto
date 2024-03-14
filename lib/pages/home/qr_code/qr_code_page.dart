@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nashe_zoloto/core/strings.dart';
+import 'package:nashe_zoloto/pages/home/detail/detail_page.dart';
 import 'package:nashe_zoloto/pages/home/qr_code/bloc/qr_code_bloc.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -27,7 +28,11 @@ class _QRCodePageState extends State<QRCodePage> {
       create: (context) => QrCodeBloc(),
       child: BlocConsumer<QrCodeBloc, QrCodeState>(
         listener: (context, state) {
-          if(state.pageState.enables){
+          if (state is QrCodeNav) {
+            print('object');
+            // Navigator.of(context).push(
+            //     MaterialPageRoute(builder: (context) =>  DetailPage(barcode: state.pageState.barcodeModel)));
+          } else if (state.pageState.enables) {
             print('stop camera');
             _controller.pauseCamera();
           }
@@ -39,7 +44,10 @@ class _QRCodePageState extends State<QRCodePage> {
                 Expanded(
                   flex: 1,
                   child: Center(
-                    child: Text(S.qr_code_adv, textAlign: TextAlign.center,),
+                    child: Text(
+                      S.qr_code_adv,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
                 Expanded(
@@ -50,8 +58,9 @@ class _QRCodePageState extends State<QRCodePage> {
                       _controller = controller;
                       _controller.scannedDataStream.listen((scanData) {
                         print('Scanned data: ${scanData.code}');
-                        context.read<QrCodeBloc>().add(
-                            QrScanEvent(scanData.code));
+                        context
+                            .read<QrCodeBloc>()
+                            .add(QrScanEvent(scanData.code));
                       });
                     },
                   ),
@@ -60,10 +69,13 @@ class _QRCodePageState extends State<QRCodePage> {
                   flex: 1,
                   child: Center(
                       child: CustomButton(
-                        text: S.go, enable: state.pageState.enables, width: 300,)
-                  ),
+                          text: S.go,
+                          enable: state.pageState.enables,
+                          width: 300,
+                          onTap: () {
+                            context.read<QrCodeBloc>().add(QrScanNavEvent());
+                          })),
                 ),
-
               ],
             ),
           );

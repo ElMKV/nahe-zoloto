@@ -30,6 +30,9 @@ class S {
 
   static const String go = 'Перейти';
 
+  //detail page
+
+  static const String code = 'Код:';
 
 
 
