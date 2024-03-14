@@ -7,3 +7,7 @@ class HomeChangePage extends HomeEvent {
   int page;
   HomeChangePage(this.page);
 }
+
+class GetProfileEvent extends HomeEvent {
+  GetProfileEvent();
+}

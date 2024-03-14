@@ -31,7 +31,8 @@ class CustomButton extends StatelessWidget {
 
           onPressed: enable == true ? onTap : null,
           style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Color(0xFFB48B1F)),
+              backgroundColor:enable == true ? MaterialStateProperty.all(Color(
+                  0xFFB48B1F)) : MaterialStateProperty.all(Color(0xFF888686)),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4.0))),
 ),

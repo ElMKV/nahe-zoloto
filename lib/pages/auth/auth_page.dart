@@ -8,7 +8,6 @@ import 'package:nashe_zoloto/futures/core_widgets/custom_button.dart';
 import 'package:nashe_zoloto/pages/auth/bloc/auth_bloc.dart';
 import 'package:nashe_zoloto/pages/home/home.dart';
 
-
 class AuthPage extends StatefulWidget {
   AuthPage({Key? key}) : super(key: key);
 
@@ -38,8 +37,9 @@ class _AuthPageState extends State<AuthPage> {
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.pageState.errMsg)));
             } else if (state is AuthNav) {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const HomePage()));            }
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomePage()));
+            }
           },
           builder: (context, state) {
             if (state is AuthLoading) {
@@ -54,7 +54,8 @@ class _AuthPageState extends State<AuthPage> {
                     Center(child: Image.asset("assets/avatar.png")),
                     const Text(
                       S.enter,
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     const Text(
                       S.hellow_title,
@@ -100,7 +101,7 @@ class _AuthPageState extends State<AuthPage> {
                     CheckboxListTile(
                       title: const Text(S.checkbox_remember_me),
                       value: true,
-                
+
                       side: const BorderSide(
                         color: Colors.black, //your desire colour here
                         width: 1.5,
@@ -112,20 +113,25 @@ class _AuthPageState extends State<AuthPage> {
                       controlAffinity: ListTileControlAffinity
                           .leading, //  <-- leading Checkbox
                     ),
-                    SizedBox(height: 41,),
+                    SizedBox(
+                      height: 41,
+                    ),
                     Center(
                         child: CustomButton(
-                          onTap: () => {
-                            context.read<AuthBloc>().add(AuthLogin(login: controller.value.text, pass: controllerPass.value.text)),
-                          },
+                      onTap: () => {
+                        context.read<AuthBloc>().add(AuthLogin(
+                            login: controller.value.text,
+                            pass: controllerPass.value.text)),
+                      },
                       text: S.enter,
                       bold: true,
                       width: 380,
                       height: 50,
                       fontSize: 16,
                     )),
-                    SizedBox(height: 10,),
-                
+                    SizedBox(
+                      height: 10,
+                    ),
                     Center(child: Text(S.forgot_password)),
                   ],
                 ),

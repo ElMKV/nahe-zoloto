@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nashe_zoloto/core/strings.dart';
 import 'package:nashe_zoloto/core/utils.dart';
-import 'package:nashe_zoloto/data/model/auth.dart';
+import 'package:nashe_zoloto/data/model/auth/auth.dart';
 import 'package:nashe_zoloto/domain/repositories/auth.dart';
 
 part 'auth_event.dart';

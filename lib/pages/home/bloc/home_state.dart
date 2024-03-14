@@ -30,13 +30,17 @@ class PageState {
   bool onAwait;
   String errMsg;
   Object? args;
+  Profile profile;
   final PageController currentPage = PageController(initialPage: 0);
+  int intCurrentPage;
 
 
   PageState({
     this.onAwait = false,
     this.errMsg = '',
     this.args,
+    this.intCurrentPage = 0,
+    this.profile = const Profile(),
 
   });
 
@@ -44,6 +48,8 @@ class PageState {
     bool? onAwait,
     String? errMsg,
     Object? args,
+    Profile? profile,
+    int? intCurrentPage,
     PageController? currentPage,
 
   }) {
@@ -51,7 +57,8 @@ class PageState {
       onAwait: onAwait ?? this.onAwait,
       errMsg: errMsg ?? this.errMsg,
       args: args ?? this.args,
-
+      intCurrentPage: intCurrentPage ?? this.intCurrentPage,
+      profile: profile ?? this.profile,
     );
   }
 }
