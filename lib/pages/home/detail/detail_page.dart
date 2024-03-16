@@ -1,14 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dash/flutter_dash.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:nashe_zoloto/core/strings.dart';
 import 'package:nashe_zoloto/data/model/barcode/barcode.dart';
 import 'package:nashe_zoloto/pages/home/detail/bloc/detail_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'package:video_player/video_player.dart';
-
-import '../../../futures/core_widgets/custom_button.dart';
 
 class DetailPage extends StatelessWidget {
   final BarcodeModel barcode;
@@ -52,7 +51,8 @@ class DetailPage extends StatelessWidget {
                             return Container(
                               child: barcode.attachments[itemIndex].name
                                       .contains('.mp4')
-                                  ? VideoApp(barcode.attachments[itemIndex].path)
+                                  ? VideoApp(
+                                      barcode.attachments[itemIndex].path)
                                   : Image.network(
                                       barcode.attachments[itemIndex].path,
                                       fit: BoxFit.fill,
@@ -123,12 +123,109 @@ class DetailPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(barcode.brand),
+                      Text(
+                        barcode.brand,
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
                       Text(
                         '${S.code} ${barcode.code}',
-                        style: TextStyle(color: Colors.grey),
+                        style: TextStyle(
+                          color: Colors.grey,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Container(
+                    height: 50,
+                    color: HexColor('F2F2F2'),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            '${barcode.prices.first.price} ₽',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 36,
+                  ),
+                  Center(
+                      child: Text(
+                    S.spec,
+                    style: TextStyle(fontSize: 24),
+                  )),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Center(
+                      child: Text(
+                    '${S.code_item} ${barcode.code}',
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                  )),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    '${barcode.name}',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 33,
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: barcode.properties.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                        child: Stack(
+                          alignment: AlignmentDirectional.centerEnd,
+                          children: [
+                            MySeparator(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  color: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 4.0),
+                                    child: Text(barcode.properties[index].name,
+                                        style: TextStyle(
+                                            fontSize: 14, color: Colors.grey)),
+                                  ),
+                                ),
+                                Container(
+                                  color: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 4.0),
+                                    child: Text(barcode.properties[index].value,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          decoration: TextDecoration.underline,
+                                        )),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   )
                 ],
               ),
@@ -140,21 +237,17 @@ class DetailPage extends StatelessWidget {
   }
 }
 
-
-
-
 /// Stateful widget to fetch and then display video content.
 class VideoApp extends StatefulWidget {
   final String path;
-  const VideoApp(this.path);
 
+  const VideoApp(this.path);
 
   @override
   _VideoAppState createState() => _VideoAppState();
 }
 
 class _VideoAppState extends State<VideoApp> {
-
   late VideoPlayerController _controller;
 
   @override
@@ -174,9 +267,10 @@ class _VideoAppState extends State<VideoApp> {
   Widget build(BuildContext context) {
     return _controller.value.isInitialized
         ? AspectRatio(
-      aspectRatio: _controller.value.aspectRatio,
-      child: Container(width: 60, height: 60, child: VideoPlayer(_controller)),
-    )
+            aspectRatio: _controller.value.aspectRatio,
+            child: Container(
+                width: 60, height: 60, child: VideoPlayer(_controller)),
+          )
         : Container();
   }
 
@@ -184,5 +278,39 @@ class _VideoAppState extends State<VideoApp> {
   void dispose() {
     super.dispose();
     _controller.dispose();
+  }
+
+
+}
+class MySeparator extends StatelessWidget {
+  const MySeparator({Key? key, this.height = 1, this.color = Colors.grey})
+      : super(key: key);
+  final double height;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final boxWidth = constraints.constrainWidth();
+        const dashWidth = 2.0;
+        final dashHeight = height;
+        final dashCount = (boxWidth / (2 * dashWidth)).floor();
+        return Flex(
+          children: List.generate(dashCount, (_) {
+            return SizedBox(
+
+              width: dashWidth,
+              height: height,
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: color),
+              ),
+            );
+          }),
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          direction: Axis.horizontal,
+        );
+      },
+    );
   }
 }

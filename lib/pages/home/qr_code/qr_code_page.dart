@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nashe_zoloto/core/strings.dart';
+import 'package:nashe_zoloto/data/model/barcode/barcode.dart';
 import 'package:nashe_zoloto/pages/home/detail/detail_page.dart';
 import 'package:nashe_zoloto/pages/home/qr_code/bloc/qr_code_bloc.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -8,6 +9,11 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import '../../../futures/core_widgets/custom_button.dart';
 
 class QRCodePage extends StatefulWidget {
+  Function goToDetail;
+
+  QRCodePage({required this.goToDetail});
+
+
   @override
   _QRCodePageState createState() => _QRCodePageState();
 }
@@ -29,9 +35,9 @@ class _QRCodePageState extends State<QRCodePage> {
       child: BlocConsumer<QrCodeBloc, QrCodeState>(
         listener: (context, state) {
           if (state is QrCodeNav) {
-            print('object');
             // Navigator.of(context).push(
             //     MaterialPageRoute(builder: (context) =>  DetailPage(barcode: state.pageState.barcodeModel)));
+            widget.goToDetail(state.pageState.barcodeModel);
           } else if (state.pageState.enables) {
             print('stop camera');
             _controller.pauseCamera();

@@ -34,6 +34,10 @@ class S {
 
   static const String code = 'Код:';
 
+  static const String spec = 'Описание и характеристики';
+
+  static const String code_item = 'Код товара';
+
 
 
   //errors

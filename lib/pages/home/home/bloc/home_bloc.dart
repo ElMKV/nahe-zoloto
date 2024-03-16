@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:nashe_zoloto/core/strings.dart';
+import 'package:nashe_zoloto/data/model/barcode/barcode.dart';
 import 'package:nashe_zoloto/data/model/profile/profile.dart';
 import 'package:nashe_zoloto/domain/repositories/auth.dart';
 
@@ -32,7 +33,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         PageController pageController = state.pageState.currentPage;
         pageController.jumpToPage(event.page);
         emit(HomeUp(state.pageState
-            .copyWith(onAwait: false, currentPage: pageController, intCurrentPage: event.page)));
+            .copyWith(onAwait: false, currentPage: pageController, intCurrentPage: event.page, goToDetail: false)));
+      });
+      on<HomeGoToDetail>((event, emit) {
+        emit(HomeUp(state.pageState
+            .copyWith(goToDetail:true, barcodeModel: event.barcode)));
       });
     });
   }}

@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:nashe_zoloto/pages/home/home/bloc/home_bloc.dart';
 
 import 'pages/auth/bloc/auth_bloc.dart';
 
@@ -7,6 +8,7 @@ final getIt = GetIt.instance;
 void init() {
   // Bloc
   getIt.registerFactory(() => AuthBloc());
+  getIt.registerFactory(() => HomeBloc());
 
 
   // // Use cases

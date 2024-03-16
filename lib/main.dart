@@ -164,9 +164,9 @@ class MyApp extends StatelessWidget {
 
         ],
         // child: AuthPage(),
-        child: DetailPage(barcode: bm,),
+        // child: DetailPage(barcode: bm,),
         // child: VideoApp(),
-        // child: HomePage(),
+        child: HomePage(),
       ),
     );
   }

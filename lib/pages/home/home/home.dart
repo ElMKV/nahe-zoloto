@@ -7,8 +7,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:nashe_zoloto/core/constants/constant.dart';
 import 'package:nashe_zoloto/core/strings.dart';
+import 'package:nashe_zoloto/data/model/barcode/barcode.dart';
 import 'package:nashe_zoloto/data/model/profile/profile.dart';
 import 'package:nashe_zoloto/futures/core_widgets/custom_button.dart';
+import 'package:nashe_zoloto/pages/home/detail/detail_page.dart';
 import 'package:nashe_zoloto/pages/home/home/bloc/home_bloc.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -28,16 +30,19 @@ class HomePage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is HomeLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return Scaffold(
+                body: const Center(child: CircularProgressIndicator()));
           } else if (state is HomeError) {
-            return Center(
-                child: Text(
-              state.pageState.errMsg,
-              style: TextStyle(color: Colors.white),
-            ));
+            return Scaffold(
+              body: Center(
+                  child: Text(
+                state.pageState.errMsg,
+                style: TextStyle(color: Colors.white),
+              )),
+            );
           }
           return Scaffold(
-            appBar: AppBar(
+            appBar: state.pageState.intCurrentPage == 0 ? AppBar(
               backgroundColor: HexColor(AppConstants.hexColor),
               actions: [
                 IconButton(
@@ -48,7 +53,7 @@ class HomePage extends StatelessWidget {
                   onPressed: () {},
                 )
               ],
-            ),
+            ) : null,
             bottomNavigationBar: BottomNavigationBar(
               selectedItemColor: Colors.white,
               unselectedItemColor: Colors.white,
@@ -86,21 +91,20 @@ class HomePage extends StatelessWidget {
             ),
             body: PageView(
               controller: state.pageState.currentPage,
-              onPageChanged: (int) {
-              },
+              onPageChanged: (int) {},
               children: <Widget>[
                 StretchableSliverAppBar(state.pageState.profile),
-
+                state.pageState.goToDetail ? DetailPage(barcode: state.pageState.barcodeModel) :
                 Center(
                   child: Container(
-                    child: QRCodePage(),
+                    child: QRCodePage(
+                      goToDetail: (value) {
+                        context.read<HomeBloc>().add(HomeGoToDetail(value));
+                      },
+                    ),
                   ),
                 ),
-                Center(
-                  child: Container(
-                    child: Text('Empty Body 3'),
-                  ),
-                )
+                Text('body 3')
               ],
               physics:
                   NeverScrollableScrollPhysics(), // Comment this if you need to use Swipe.
@@ -240,4 +244,3 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
     }
   }
 }
-

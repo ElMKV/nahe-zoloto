@@ -28,8 +28,10 @@ class HomeError extends HomeState {
 
 class PageState {
   bool onAwait;
+  bool goToDetail;
   String errMsg;
   Object? args;
+  BarcodeModel barcodeModel;
   Profile profile;
   final PageController currentPage = PageController(initialPage: 0);
   int intCurrentPage;
@@ -37,8 +39,10 @@ class PageState {
 
   PageState({
     this.onAwait = false,
+    this.goToDetail = false,
     this.errMsg = '',
     this.args,
+    this.barcodeModel= const BarcodeModel(),
     this.intCurrentPage = 0,
     this.profile = const Profile(),
 
@@ -46,8 +50,10 @@ class PageState {
 
   PageState copyWith({
     bool? onAwait,
+    bool? goToDetail,
     String? errMsg,
     Object? args,
+    BarcodeModel? barcodeModel,
     Profile? profile,
     int? intCurrentPage,
     PageController? currentPage,
@@ -55,8 +61,10 @@ class PageState {
   }) {
     return PageState(
       onAwait: onAwait ?? this.onAwait,
+      goToDetail: goToDetail ?? this.goToDetail,
       errMsg: errMsg ?? this.errMsg,
       args: args ?? this.args,
+      barcodeModel: barcodeModel ?? this.barcodeModel,
       intCurrentPage: intCurrentPage ?? this.intCurrentPage,
       profile: profile ?? this.profile,
     );
