@@ -12,12 +12,15 @@ import 'package:nashe_zoloto/data/model/profile/profile.dart';
 import 'package:nashe_zoloto/futures/core_widgets/custom_button.dart';
 import 'package:nashe_zoloto/pages/home/detail/detail_page.dart';
 import 'package:nashe_zoloto/pages/home/home/bloc/home_bloc.dart';
+import 'package:nashe_zoloto/pages/home/map/map_page.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import '../qr_code/qr_code_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
 
   // This widget is the root of your application.
   @override
@@ -42,18 +45,20 @@ class HomePage extends StatelessWidget {
             );
           }
           return Scaffold(
-            appBar: state.pageState.intCurrentPage == 0 ? AppBar(
-              backgroundColor: HexColor(AppConstants.hexColor),
-              actions: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.exit_to_app_outlined,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {},
-                )
-              ],
-            ) : null,
+            appBar: state.pageState.intCurrentPage == 0
+                ? AppBar(
+                    backgroundColor: HexColor(AppConstants.hexColor),
+                    actions: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.exit_to_app_outlined,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {},
+                      )
+                    ],
+                  )
+                : null,
             bottomNavigationBar: BottomNavigationBar(
               selectedItemColor: Colors.white,
               unselectedItemColor: Colors.white,
@@ -92,22 +97,20 @@ class HomePage extends StatelessWidget {
             body: PageView(
               controller: state.pageState.currentPage,
               onPageChanged: (int) {},
+              physics: NeverScrollableScrollPhysics(),
               children: <Widget>[
                 StretchableSliverAppBar(state.pageState.profile),
-                state.pageState.goToDetail ? DetailPage(barcode: state.pageState.barcodeModel) :
-                Center(
-                  child: Container(
-                    child: QRCodePage(
-                      goToDetail: (value) {
-                        context.read<HomeBloc>().add(HomeGoToDetail(value));
-                      },
-                    ),
-                  ),
-                ),
-                Text('body 3')
-              ],
-              physics:
-                  NeverScrollableScrollPhysics(), // Comment this if you need to use Swipe.
+                state.pageState.goToDetail
+                    ? DetailPage(barcode: state.pageState.barcodeModel)
+                    : Center(
+                        child: QRCodePage(
+                          goToDetail: (value) {
+                            context.read<HomeBloc>().add(HomeGoToDetail(value));
+                          },
+                        ),
+                      ),
+                MapPage()
+              ], // Comment this if you need to use Swipe.
             ),
           );
         },
@@ -161,7 +164,6 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     final appBarSize = expandedHeight - shrinkOffset;
-    final cardTopPosition = expandedHeight / 2 - shrinkOffset;
     final proportion = 2 - (expandedHeight / appBarSize);
     final percent = proportion < 0 || proportion > 1 ? 0.0 : proportion;
     return SizedBox(

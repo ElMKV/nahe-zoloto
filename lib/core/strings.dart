@@ -39,6 +39,12 @@ class S {
   static const String code_item = 'Код товара';
 
 
+  //map page
+
+
+  static const String map_error = 'Ошибка загрузки карты';
+
+
 
   //errors
   static const String error_title = "Ошибка";

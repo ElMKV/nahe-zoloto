@@ -45,7 +45,7 @@ android {
         applicationId "com.example.nashe_zoloto"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 20
+        minSdkVersion 21
         multiDexEnabled true
 
         targetSdkVersion flutter.targetSdkVersion
@@ -67,6 +67,8 @@ flutter {
 }
 
 dependencies {
-    implementation('com.google.android.exoplayer:exoplayer:2.19.1')
+//    implementation('com.google.android.exoplayer:exoplayer:2.19.1')
+    implementation 'com.yandex.android:maps.mobile:4.4.0-full'
+
 
 }
