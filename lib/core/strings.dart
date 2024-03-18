@@ -44,6 +44,14 @@ class S {
 
   static const String map_error = 'Ошибка загрузки карты';
 
+  static const String city = 'Города';
+
+  static const String all_salons = 'все салоны';
+
+  static const String on_map = 'На карте';
+
+  static const String list = 'Списком';
+
 
 
   //errors

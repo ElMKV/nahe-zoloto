@@ -44,73 +44,78 @@ class HomePage extends StatelessWidget {
               )),
             );
           }
-          return Scaffold(
-            appBar: state.pageState.intCurrentPage == 0
-                ? AppBar(
-                    backgroundColor: HexColor(AppConstants.hexColor),
-                    actions: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.exit_to_app_outlined,
-                          color: Colors.white,
+          return SafeArea(
+            minimum: const EdgeInsets.all(0.0),
+
+            left: true,
+            child: Scaffold(
+              appBar: state.pageState.intCurrentPage == 0
+                  ? AppBar(
+                      backgroundColor: HexColor(AppConstants.hexColor),
+                      actions: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.exit_to_app_outlined,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {},
+                        )
+                      ],
+                    )
+                  : null,
+              bottomNavigationBar: BottomNavigationBar(
+                selectedItemColor: Colors.white,
+                unselectedItemColor: Colors.white,
+                backgroundColor: HexColor(AppConstants.hexColor),
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: SvgPicture.asset(
+                      fit: BoxFit.scaleDown,
+                      'assets/home.svg',
+                    ),
+                    label: S.home,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: SvgPicture.asset(
+                      fit: BoxFit.scaleDown,
+                      'assets/scan-qr-code.svg',
+                    ),
+                    label: S.qr_code,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: SvgPicture.asset(
+                      fit: BoxFit.scaleDown,
+                      'assets/map.svg',
+                    ),
+                    label: S.map,
+                  ),
+                ],
+                currentIndex: state.pageState.intCurrentPage,
+                selectedLabelStyle: TextStyle(
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.white),
+                onTap: (int index) {
+                  context.read<HomeBloc>().add(HomeChangePage(index));
+                },
+              ),
+              body: PageView(
+                controller: state.pageState.currentPage,
+                onPageChanged: (int) {},
+                physics: NeverScrollableScrollPhysics(),
+                children: <Widget>[
+                  StretchableSliverAppBar(state.pageState.profile),
+                  state.pageState.goToDetail
+                      ? DetailPage(barcode: state.pageState.barcodeModel)
+                      : Center(
+                          child: QRCodePage(
+                            goToDetail: (value) {
+                              context.read<HomeBloc>().add(HomeGoToDetail(value));
+                            },
+                          ),
                         ),
-                        onPressed: () {},
-                      )
-                    ],
-                  )
-                : null,
-            bottomNavigationBar: BottomNavigationBar(
-              selectedItemColor: Colors.white,
-              unselectedItemColor: Colors.white,
-              backgroundColor: HexColor(AppConstants.hexColor),
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset(
-                    fit: BoxFit.scaleDown,
-                    'assets/home.svg',
-                  ),
-                  label: S.home,
-                ),
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset(
-                    fit: BoxFit.scaleDown,
-                    'assets/scan-qr-code.svg',
-                  ),
-                  label: S.qr_code,
-                ),
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset(
-                    fit: BoxFit.scaleDown,
-                    'assets/map.svg',
-                  ),
-                  label: S.map,
-                ),
-              ],
-              currentIndex: state.pageState.intCurrentPage,
-              selectedLabelStyle: TextStyle(
-                  decoration: TextDecoration.underline,
-                  decorationColor: Colors.white),
-              onTap: (int index) {
-                context.read<HomeBloc>().add(HomeChangePage(index));
-              },
-            ),
-            body: PageView(
-              controller: state.pageState.currentPage,
-              onPageChanged: (int) {},
-              physics: NeverScrollableScrollPhysics(),
-              children: <Widget>[
-                StretchableSliverAppBar(state.pageState.profile),
-                state.pageState.goToDetail
-                    ? DetailPage(barcode: state.pageState.barcodeModel)
-                    : Center(
-                        child: QRCodePage(
-                          goToDetail: (value) {
-                            context.read<HomeBloc>().add(HomeGoToDetail(value));
-                          },
-                        ),
-                      ),
-                MapPage()
-              ], // Comment this if you need to use Swipe.
+                  MapPage()
+                ], // Comment this if you need to use Swipe.
+              ),
             ),
           );
         },

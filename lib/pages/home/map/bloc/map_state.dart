@@ -30,38 +30,42 @@ class MapError extends MapState {
 
 class PageState {
   bool onAwait;
-  bool goToDetail;
+  bool mapView;
   String errMsg;
   Object? args;
   List<MapModel> mapModel;
+  List<PlacemarkMapObject> pointMap;
 
 
 
   PageState({
     this.onAwait = false,
-    this.goToDetail = false,
+    this.mapView = false,
     this.errMsg = '',
     this.args,
     this.mapModel = const [],
+    this.pointMap = const [],
 
 
   });
 
   PageState copyWith({
     bool? onAwait,
-    bool? goToDetail,
+    bool? mapView,
     String? errMsg,
     Object? args,
-    List<MapModel>? mapModel
+    List<MapModel>? mapModel,
+    List<PlacemarkMapObject>? pointMap
 
 
   }) {
     return PageState(
       onAwait: onAwait ?? this.onAwait,
-      goToDetail: goToDetail ?? this.goToDetail,
+      mapView: mapView ?? this.mapView,
       errMsg: errMsg ?? this.errMsg,
       args: args ?? this.args,
       mapModel: mapModel ?? this.mapModel,
+      pointMap: pointMap ?? this.pointMap,
     );
   }
 }

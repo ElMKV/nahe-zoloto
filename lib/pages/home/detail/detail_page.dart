@@ -294,7 +294,6 @@ class MySeparator extends StatelessWidget {
       builder: (BuildContext context, BoxConstraints constraints) {
         final boxWidth = constraints.constrainWidth();
         const dashWidth = 2.0;
-        final dashHeight = height;
         final dashCount = (boxWidth / (2 * dashWidth)).floor();
         return Flex(
           children: List.generate(dashCount, (_) {

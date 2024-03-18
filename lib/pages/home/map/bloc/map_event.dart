@@ -13,3 +13,7 @@ class HomeChangePage extends MapEvent {
 class GetAddressEvent extends MapEvent {
   GetAddressEvent();
 }
+class MapChangeTab extends MapEvent {
+  bool isMap;
+  MapChangeTab(this.isMap);
+}
