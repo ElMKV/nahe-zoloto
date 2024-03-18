@@ -17,7 +17,7 @@ class AuthApi {
     }
   }
 
-  static Future<Response?> getProfile() async {
+  static Future<Response?> getProfile(String token) async {
     var dio = Dio();
     Response? auth;
     try {
@@ -25,7 +25,7 @@ class AuthApi {
           options: Options(headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': 'Bearer 75ab8da27101c419cee789bf19e5660aaf684143601356ac4a6bc796656c986a',
+            'Authorization': 'Bearer ${token}',
           }));
       print('STATUS ${auth.statusMessage}');
       print('DATA ${auth.data}');

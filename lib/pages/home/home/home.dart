@@ -46,11 +46,11 @@ class HomePage extends StatelessWidget {
           }
           return SafeArea(
             minimum: const EdgeInsets.all(0.0),
-
             left: true,
             child: Scaffold(
               appBar: state.pageState.intCurrentPage == 0
                   ? AppBar(
+                automaticallyImplyLeading: false,
                       backgroundColor: HexColor(AppConstants.hexColor),
                       actions: [
                         IconButton(
@@ -178,11 +178,13 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
           SizedBox(
             height: appBarSize < kToolbarHeight ? kToolbarHeight : appBarSize,
             child: AppBar(
+              automaticallyImplyLeading: false,
+
               backgroundColor: HexColor(AppConstants.hexColor),
               elevation: 0.0,
               title: Opacity(
                   opacity: hideTitleWhenExpanded ? 1.0 - percent : 1.0,
-                  child: Text(profile.name.toString())),
+                  child: Text(profile.name.toString(), style: TextStyle(color: Colors.white),)),
             ),
           ),
           Positioned(

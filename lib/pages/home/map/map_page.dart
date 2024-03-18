@@ -61,19 +61,30 @@ class MapPage extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 30,
+                          height: 20,
                         ),
-                        Text(
-                          S.city,
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w300),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              S.city,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w300),
+                            ),
+                          ),
                         ),
-                        SizedBox(
-                          height: 10,
+                        // SizedBox(
+                        //   height: 10,
+                        // ),
+                        Container(
+                          color: HexColor(AppConstants.hexColor),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(S.all_salons,
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w300)),
+                          ),
                         ),
-                        Text(S.all_salons,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w300)),
                         SizedBox(
                           height: 16,
                         ),

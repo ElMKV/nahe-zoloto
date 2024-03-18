@@ -63,90 +63,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BarcodeModel bm = BarcodeModel.fromJson({
-      "code": "000-230966",
-      "name": "Золотые серьги гвоздики с бриллиантами, топазами и лунными камнями",
-      "prices": [
-        {
-          "size": "0",
-          "price": 19900
-        }
-      ],
-      "brand": "Ла Ви",
-      "properties": [
-        {
-          "name": "Категория",
-          "value": "Серьги"
-        },
-        {
-          "name": "Подкатегория",
-          "value": "Серьги гвоздики"
-        },
-        {
-          "name": "Материал",
-          "value": "Золото"
-        },
-        {
-          "name": "Проба",
-          "value": "золото 585 пробы"
-        },
-        {
-          "name": "Цвет",
-          "value": "Красный"
-        },
-        {
-          "name": "Наличие декоративной накладки",
-          "value": "0"
-        },
-        {
-          "name": "Стадия жизни номенклатуры",
-          "value": "Новый"
-        },
-        {
-          "name": "Вставки ",
-          "value": "Лунный камень, Бриллиант, Топаз, Раухтопаз"
-        },
-        {
-          "name": "Производитель",
-          "value": "Ла Ви"
-        }
-      ],
-      "attachments": [
-        {
-          "name": "000-230966#1.jpg",
-          "path": "https://helper_dev.ourgold.ru/public/goods_attachments/site/230/966/000-230966/WWEMs0VPNyeVxbraR91nAT3bZ8N0XBqCl1aRNldV.jpg"
-        },
-        {
-          "name": "000-230966#2.jpg",
-          "path": "https://helper_dev.ourgold.ru/public/goods_attachments/site/230/966/000-230966/6WBGYsomTBdBLxB1phnP8d1sXKE3sdOs9ixWVgQ7.jpg"
-        },
-        {
-          "name": "000-230966#3.jpg",
-          "path": "https://helper_dev.ourgold.ru/public/goods_attachments/site/230/966/000-230966/K3J8FxEmoFSIB2Icm0hBCGWR0zPGH8MthvFwUyza.jpg"
-        },
-        {
-          "name": "000-230966#4.jpg",
-          "path": "https://helper_dev.ourgold.ru/public/goods_attachments/site/230/966/000-230966/7hojei3KlZW3XcLvOmbp2oGLuewZlJRYqksAD9Gl.jpg"
-        },
-        {
-          "name": "000-230966#5.jpg",
-          "path": "https://helper_dev.ourgold.ru/public/goods_attachments/site/230/966/000-230966/8B7D8F8O2tybPYH6ctxcVHeuV0X9hOtagQhjZYcF.jpg"
-        },
-        {
-          "name": "000-230966#6.jpg",
-          "path": "https://helper_dev.ourgold.ru/public/goods_attachments/site/230/966/000-230966/9gKt7RmgPuUqAFtThbjR14RxI5FQPEOpVfEEfgKp.jpg"
-        },
-        {
-          "name": "000-230966#7.jpg",
-          "path": "https://helper_dev.ourgold.ru/public/goods_attachments/site/230/966/000-230966/teqx9D6QO2B6vaJjnrC34S4yp9FXPRzsuKvEpp9v.jpg"
-        },
-        {
-          "name": "000-230966.mp4",
-          "path": "https://helper_dev.ourgold.ru/public/goods_attachments/site_video/230/966/000-230966/aN7pV3EWJiiD5A2MTQ9MC0NO70zt3HkGKbS4HIHZ.mp4"
-        }
-      ]
-    });
-
     return MaterialApp(
       theme: ThemeData(
         checkboxTheme: CheckboxThemeData(
@@ -163,10 +79,10 @@ class MyApp extends StatelessWidget {
           ),
 
         ],
-        // child: AuthPage(),
+        child: AuthPage(),
         // child: DetailPage(barcode: bm,),
         // child: VideoApp(),
-        child: HomePage(),
+        // child: HomePage(),
       ),
     );
   }

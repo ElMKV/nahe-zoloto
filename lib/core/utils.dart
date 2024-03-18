@@ -12,8 +12,8 @@ Future SaveLoginData(String? token) async {
 Future<String?> GetLoginData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
      var token = prefs.getString('token');
+    print('token');
     print(token);
-
     return token;
 
 }

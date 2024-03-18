@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:nashe_zoloto/core/utils.dart';
 import 'package:nashe_zoloto/data/api/auth_api/auth_api.dart';
 
 import 'package:nashe_zoloto/data/model/auth/auth.dart';
@@ -25,18 +26,23 @@ class AuthRepository {
   }
 
   Future<Profile?> getProfile() async {
-    try {
-      final response = await AuthApi.getProfile();
-      return (response?.data != null)
-          ? Profile.fromJson(response!.data)
-          : const Profile();
-    } on DioError catch (e) {
-      print(e);
-      // final errorMessage = DioExceptions.fromDioError(e).toString();
-      // // final SnackBar snackBar = SnackBar(content: Text(errorMessage));
-      // // snackbarKey.currentState?.showSnackBar(snackBar);
-      return const Profile();
+    String? token = await GetLoginData();
+
+    if(token != null){
+      try {
+        final response = await AuthApi.getProfile(token);
+        return (response?.data != null)
+            ? Profile.fromJson(response!.data)
+            : const Profile();
+      } on DioError catch (e) {
+        print(e);
+        // final errorMessage = DioExceptions.fromDioError(e).toString();
+        // // final SnackBar snackBar = SnackBar(content: Text(errorMessage));
+        // // snackbarKey.currentState?.showSnackBar(snackBar);
+        return const Profile();
+      }
     }
+
   }
 }
 
