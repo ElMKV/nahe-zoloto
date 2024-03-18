@@ -11,6 +11,10 @@ class HomeGoToDetail extends HomeEvent {
   BarcodeModel barcode;
   HomeGoToDetail(this.barcode);
 }
+class HomeGoToDetailSalon extends HomeEvent {
+  BarcodeModel barcode;
+  HomeGoToDetailSalon(this.barcode);
+}
 
 class GetProfileEvent extends HomeEvent {
   GetProfileEvent();

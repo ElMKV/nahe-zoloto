@@ -17,3 +17,11 @@ class MapChangeTab extends MapEvent {
   bool isMap;
   MapChangeTab(this.isMap);
 }
+class MapViewSalonsDetail extends MapEvent {
+  MapModel currentMapModel;
+  MapViewSalonsDetail(this.currentMapModel);
+}
+class MapViewSalonsDetailOff extends MapEvent {
+  bool isList;
+  MapViewSalonsDetailOff(this.isList);
+}

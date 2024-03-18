@@ -44,8 +44,16 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     });
     on<MapChangeTab>((event, emit) {
       emit(MapUp(state.pageState.copyWith(
-        mapView: event.isMap
+        mapView: event.isMap,
+        viewSalonDetail: false
       )));
+
+    });
+    on<MapViewSalonsDetail>((event, emit) {
+      emit(MapUp(state.pageState.copyWith(
+          currentMapModel: event.currentMapModel, viewSalonDetail: true
+      )));
+
 
     });
   }

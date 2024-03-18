@@ -46,11 +46,15 @@ class S {
 
   static const String city = 'Города';
 
+  static const String salons = 'Салоны';
+
   static const String all_salons = 'все салоны';
 
   static const String on_map = 'На карте';
 
   static const String list = 'Списком';
+
+  static const String hint_search = 'Поиск по адресу';
 
 
 
