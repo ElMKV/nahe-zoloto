@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:nashe_zoloto/core/constants/constant.dart';
 import 'package:nashe_zoloto/core/strings.dart';
 import 'package:nashe_zoloto/domain/router/route_impl.dart';
 import 'package:nashe_zoloto/futures/core_widgets/custom_button.dart';
@@ -43,7 +45,9 @@ class _AuthPageState extends State<AuthPage> {
           },
           builder: (context, state) {
             if (state is AuthLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator(
+                color: HexColor(AppConstants.hexColor),
+              ));
             }
             return Padding(
               padding: const EdgeInsets.only(top: 23.0, left: 18, right: 18),

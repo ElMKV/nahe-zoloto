@@ -25,7 +25,9 @@ class MapPage extends StatelessWidget {
         builder: (context, state) {
           if (state is MapLoading) {
             return Scaffold(
-                body: const Center(child: CircularProgressIndicator()));
+                body: Center(child: CircularProgressIndicator(
+                  color: HexColor(AppConstants.hexColor),
+                )));
           } else if (state is MapError) {
             return Scaffold(
               body: Center(
@@ -39,7 +41,7 @@ class MapPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(

@@ -26,15 +26,6 @@ class DetailPage extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
-          // if (state is HomeLoading) {
-          //   return const Center(child: CircularProgressIndicator());
-          // } else if (state is HomeError) {
-          //   return Center(
-          //       child: Text(
-          //         state.pageState.errMsg,
-          //         style: TextStyle(color: Colors.white),
-          //       ));
-          // }
           return Scaffold(
               body: SingleChildScrollView(
             child: Padding(
@@ -209,15 +200,19 @@ class DetailPage extends StatelessWidget {
                                             fontSize: 14, color: Colors.grey)),
                                   ),
                                 ),
-                                Container(
-                                  color: Colors.white,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 4.0),
-                                    child: Text(barcode.properties[index].value,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          decoration: TextDecoration.underline,
-                                        )),
+                                Flexible(
+                                  child: Container(
+                                    color: Colors.white,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 4.0),
+                                      child: Text(barcode.properties[index].value,
+                                          overflow: TextOverflow.ellipsis,
+
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            decoration: TextDecoration.underline,
+                                          )),
+                                    ),
                                   ),
                                 )
                               ],

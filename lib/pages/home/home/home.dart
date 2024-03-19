@@ -34,7 +34,9 @@ class HomePage extends StatelessWidget {
         builder: (context, state) {
           if (state is HomeLoading) {
             return Scaffold(
-                body: const Center(child: CircularProgressIndicator()));
+                body: Center(child: CircularProgressIndicator(
+                  color: HexColor(AppConstants.hexColor),
+                )));
           } else if (state is HomeError) {
             return Scaffold(
               body: Center(
